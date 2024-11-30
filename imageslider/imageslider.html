@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Image Slider</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<style>
+    body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Calibri, sans-serif;
+    background-color: #f3e8e0;
+    color: #5a3e36;
+}
+
+.slider {
+    position: relative;
+    width: 80%;
+    max-width: 800px;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    background: #e3d6c1;
+}
+
+.slides {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+    min-width: 100%;
+    transition: opacity 0.5s ease-in-out;
+    text-align: center;
+}
+
+.slide img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.caption {
+    font-size: 20px;
+    padding: 10px;
+    background: rgba(90, 62, 54, 0.8);
+    color: white;
+    border-radius: 0 0 10px 10px;
+}
+
+button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(90, 62, 54, 0.7);
+    border: none;
+    color: white;
+    font-size: 24px;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    user-select: none;
+    z-index: 10;
+}
+
+button.prev {
+    left: 10px;
+}
+
+button.next {
+    right: 10px;
+}
+
+button:hover {
+    background-color: rgba(90, 62, 54, 0.9);
+}
+
+</style>
+<body>
+    <div class="slider">
+        <div class="slides">
+            <div class="slide">
+                <img src="bmwslide1.jpeg" alt="BMW">
+                <div class="caption">BMW</div>
+            </div>
+            <div class="slide">
+                <img src="porscheslide2.avif" alt="Porsche">
+                <div class="caption">Porsche</div>
+            </div>
+            <div class="slide">
+                <img src="rolls5.webp" alt="Rolls Royce">
+                <div class="caption">Rolls Royce</div>
+            </div>
+        </div>
+        <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
+        <button class="next" onclick="changeSlide(1)">&#10095;</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+<script>
+    let slideIndex = 0;
+const slides = document.querySelectorAll('.slide');
+
+function showSlide(index) {
+    if (index >= slides.length) {
+        slideIndex = 0;
+    } else if (index < 0) {
+        slideIndex = slides.length - 1;
+    } else {
+        slideIndex = index;
+    }
+
+    slides.forEach((slide, i) => {
+        slide.style.transform = `translateX(-${slideIndex * 100}%)`;
+    });
+}
+
+function changeSlide(n) {
+    showSlide(slideIndex + n);
+}
+
+// Initial display
+showSlide(slideIndex);
+
+</script>
+</html>
